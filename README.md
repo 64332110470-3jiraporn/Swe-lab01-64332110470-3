@@ -33,7 +33,7 @@ print(calculate_grade(scores))
 print(calculate_grade([]))
 
 - `part2-ai-experiment/mystery_code.py`
-def process_data(records):
+- def process_data(records):
     # 1. ป้องกันกรณีส่งลิสต์ว่างมาให้คำนวณเพื่อความรวดเร็วและปลอดภัย
     if not records:
         return {}
@@ -68,7 +68,7 @@ for cat, stats in output.items():
     print(f"{cat}: total={stats['total']}, count={stats['count']}, avg={stats['average']:.1f}")
     
 - `part2-ai-experiment/validate_id.py`
-กรณีที่ 1 - รหัส: 63332110339-5   -> ผลลัพธ์: True
+- กรณีที่ 1 - รหัส: 63332110339-5   -> ผลลัพธ์: True
 กรณีที่ 2 - รหัส: 633321103395    -> ผลลัพธ์: False
 กรณีที่ 3 - รหัส: 6333211033-5    -> ผลลัพธ์: False
 True
