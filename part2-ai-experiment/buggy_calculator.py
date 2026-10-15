@@ -1,4 +1,9 @@
 def calculate_grade(scores):
+    # 1. ป้องกัน Bug กรณี scores เป็นลิสต์ว่าง (ZeroDivisionError)
+    if not scores:
+        return "N/A", 0.0
+
+    # 2. แก้ไขระบบการย่อหน้า (Indentation) ให้ถูกต้องตรงตามมาตรฐาน
     total = 0
     for score in scores:
         total = total + score
@@ -18,3 +23,4 @@ def calculate_grade(scores):
 
 scores = [85, 92, 78, 88, 95]
 print(calculate_grade(scores))
+print(calculate_grade([]))
