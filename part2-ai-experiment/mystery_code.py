@@ -1,25 +1,33 @@
-def calculate_grade(scores):
-    # 1. ป้องกัน Bug กรณี scores เป็นลิสต์ว่าง (ZeroDivisionError)
-    if not scores:
-        return "N/A", 0.0
+def process_data(records):
+    # 1. ป้องกันกรณีส่งลิสต์ว่างมาให้คำนวณเพื่อความรวดเร็วและปลอดภัย
+    if not records:
+        return {}
 
-    # 2. แก้ไขระบบการย่อหน้า (Indentation) ให้ถูกต้องตรงตามมาตรฐาน
-    total = 0
-    for score in scores:
-        total = total + score
-    average = total / len(scores)
+    result = {}
+    # 2. วนลูปจัดกลุ่มข้อมูลและสะสมยอดรวมแยกตาม category
+    for item in records:
+        key = item.get("category", "unknown")
+        value = item.get("amount", 0)
+        if key not in result:
+            result[key] = {"total": 0, "count": 0}
+        result[key]["total"] += value
+        result[key]["count"] += 1
 
-    if average >= 80:
-        grade = "A"
-    elif average >= 70:
-        grade = "B"
-    elif average >= 60:
-        grade = "C"
-    elif average >= 50:
-        grade = "D"
-    else:
-        grade = "F"
-    return grade, average
+    # 3. วนลูปคำนวณหาค่าเฉลี่ยของแต่ละหมวดหมู่
+    for key in result:
+        result[key]["average"] = result[key]["total"] / result[key]["count"]
 
-scores = [85, 92, 78, 88, 95]
-print(calculate_grade(scores))
+    return result
+
+# ทดสอบการใช้งานด้วยข้อมูลตัวอย่าง
+sample = [
+    {"category": "food", "amount": 120},
+    {"category": "transport", "amount": 45},
+    {"category": "food", "amount": 85},
+    {"category": "transport", "amount": 30},
+    {"category": "entertainment", "amount": 200},
+]
+
+output = process_data(sample)
+for cat, stats in output.items():
+    print(f"{cat}: total={stats['total']}, count={stats['count']}, avg={stats['average']:.1f}")
